@@ -1,0 +1,60 @@
+﻿
+<html>
+<head>
+<title>Send Fake Email </title>
+</head>
+<body>
+
+<h1 style='width:800px;'>&nbsp&nbspSend Fake Email!</h1>
+
+{% if unknown_error%}
+&nbsp&nbspERROR!
+{% else %}
+{% if feedback_sent%}
+	&nbsp&nbspyour message is sent!
+    <br>
+    &nbsp&nbsp
+    
+
+
+{% else %}
+<br><br>
+
+<form  action="" method="post" target= style="height:450px;"  >{% csrf_token %}
+
+
+
+&nbsp&nbspYour Fake Email Address:
+<br>
+&nbsp&nbsp<input  id="user" name="user" style="width:300px; " type="text" />
+{% if error_user %}
+<br>
+	<font color="red">{{ error_user }}</font>
+{% endif %}
+<br>
+&nbsp&nbspReceiver:
+<br>
+&nbsp&nbsp<input  id="receiver" name="receiver" style="width:300px; " type="text" />
+<br>
+
+&nbsp&nbspSubject:
+<br>
+&nbsp&nbsp<input  id="subject" name="subject" style="width:300px; " type="text" />
+<br>
+&nbsp&nbspYour Message:
+<br>
+&nbsp&nbsp<textarea cols="40" id="content" name="content" rows="10" style="width:800px; height:250px;"></textarea>
+<div  style="height:700px;">
+{% if error_content %}
+<br>
+	<font color="red">{{ error_content }}</font>
+{% endif %}
+&nbsp&nbsp<input autocapitalize="off" type="submit" name="send" value="Send" />
+</div>
+
+</form>
+
+{% endif %}
+{% endif %}
+</body>
+</html>
