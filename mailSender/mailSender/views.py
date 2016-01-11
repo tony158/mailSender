@@ -15,10 +15,13 @@ def send_email(sender,message,receiver,subject):
         s.sendmail(sender, [receiver], msg.as_string())
         
         s.close()
-    except:
-        unknown_error=1
-        return unknown_error
-
+    except smtplib.SMTPException as smtpEx:
+        error_code = 1
+        return [error_code, smtpEx.as_text()]
+    else:
+        error_code = 0
+        return [error_code, "success"]
+    
 def email5(request):
     unknown_error=0
     
@@ -27,10 +30,10 @@ def email5(request):
         message=request.POST['content']
         receiver=request.POST['receiver']
         subject=request.POST['subject']
-        unknown_error=send_email(sender,message,receiver,subject)
+        unknown_error,feed_back_msg =send_email(sender,message,receiver,subject)
         
         if unknown_error==1:
-            return render(request, 'email5.html', {'unknown_error': unknown_error,})
+            return render(request, 'email5.html', {'unknown_error': feed_back_msg,})
             
         feedback_sent=1
         return render(request, 'email5.html', {'feedback_sent': feedback_sent,})

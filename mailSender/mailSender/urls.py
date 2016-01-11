@@ -18,12 +18,12 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from views import email5 
+from . import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
     
-    url(r'^email5/$', email5),
+    url(r'^email5/$', views.email5),
     # Examples:
     # url(r'^$', 'nadipopust.views.home', name='home'),
     # url(r'^nadipopust/', include('nadipopust.foo.urls')),
